@@ -1,5 +1,14 @@
 import React from "react";
-import { Card, Text, Button, Group, Stack, Avatar, Grid } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Button,
+  Group,
+  Stack,
+  Avatar,
+  Grid,
+  Divider,
+} from "@mantine/core";
 
 export function SocialCard() {
   const username = "Hello world";
@@ -25,13 +34,23 @@ export function SocialCard() {
           radius="xl"
         />
 
-        <Stack sx={() => ({ gap: "0.5rem" })}>
-          <Text weight={500}>Username: {username}</Text>
+        <Stack sx={() => ({ gap: "0.1rem" })}>
+          <Text weight={500}>Display Name</Text>
+          <Text>Username: {username}</Text>
           <Text>User handle: {username}#1</Text>
         </Stack>
       </Group>
 
-      <Grid sx={() => ({ marginTop: "1rem" })}>
+      <Divider my="sm" />
+
+      <Text mt="1rem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis nisl
+        finibus, interdum dolor in, imperdiet magna. Integer in purus nec augue
+        ultricies sollicitudin sit amet a ligula. In eget sollicitudin justo.
+        Orci varius natoque penatibus et turpis.
+      </Text>
+
+      <Grid>
         <Grid.Col span={4}>
           <Button variant="light" color="blue" fullWidth mt="md" radius="md">
             button
