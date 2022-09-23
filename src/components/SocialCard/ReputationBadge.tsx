@@ -1,5 +1,5 @@
 import React from "react";
-import { FaMedal } from "react-icons/Fa";
+import { FaMedal } from "react-icons/fa";
 
 import Badge from "./Badge";
 
