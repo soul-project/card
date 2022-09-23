@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFillPeopleFill } from "react-icons/Bs";
+import { BsFillPeopleFill } from "react-icons/bs";
 
 import Badge from "./Badge";
 
