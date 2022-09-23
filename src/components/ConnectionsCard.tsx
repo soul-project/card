@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Divider, Stack, Tabs } from "@mantine/core";
-import { BsFillPeopleFill } from "react-icons/Bs";
+import { BsFillPeopleFill } from "react-icons/bs";
 import { SiHandshake } from "react-icons/si";
 
 import Profile from "./Profile";
