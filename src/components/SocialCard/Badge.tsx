@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Group, Tooltip } from "@mantine/core";
-import { BsFillPeopleFill } from "react-icons/Bs";
+import { Button, Group, Tooltip } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
 
 export default function Badge({ children, label }: Props) {
