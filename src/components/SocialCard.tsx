@@ -18,20 +18,7 @@ import Profile from "./Profile";
 export function SocialCard() {
   const username = "hello-world";
   return (
-    <Card
-      shadow="sm"
-      p="lg"
-      radius="md"
-      withBorder
-      // TODO: Maybe let's not do a gradient instead
-      // sx={(theme) => ({
-      //   backgroundImage: theme.fn.gradient({
-      //     from: "#F72585",
-      //     to: "#7209B7",
-      //     deg: 45,
-      //   }),
-      // })}
-    >
+    <Card shadow="sm" p="lg" radius="md" withBorder>
       <Profile username={username} displayName="Display Name" />
 
       <Divider my="sm" />
