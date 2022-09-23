@@ -1,13 +1,22 @@
 import React from "react";
-import { Card, Text, Group, Stack, Avatar, Grid, Divider } from "@mantine/core";
-import { BsFillPeopleFill } from "react-icons/Bs";
+import {
+  Card,
+  Text,
+  Group,
+  Stack,
+  Avatar,
+  Grid,
+  Divider,
+  Code,
+} from "@mantine/core";
 
 import FollowerBadge from "./SocialCard/FollowerBadge";
 import ReputationBadge from "./SocialCard/ReputationBadge";
 import QRBadge from "./SocialCard/QRBadge";
+import Profile from "./Profile";
 
 export function SocialCard() {
-  const username = "Hello world";
+  const username = "hello-world";
   return (
     <Card
       shadow="sm"
@@ -23,19 +32,7 @@ export function SocialCard() {
       //   }),
       // })}
     >
-      <Group>
-        <Avatar
-          src={`https://avatars.dicebear.com/api/identicon/${username}.svg`}
-          alt="Avatar image"
-          radius="xl"
-        />
-
-        <Stack sx={() => ({ gap: "0.1rem" })}>
-          <Text weight={500}>Display Name</Text>
-          <Text>Username: {username}</Text>
-          <Text>User handle: {username}#1</Text>
-        </Stack>
-      </Group>
+      <Profile username={username} displayName="Display Name" />
 
       <Divider my="sm" />
 
