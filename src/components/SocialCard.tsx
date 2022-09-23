@@ -1,14 +1,10 @@
 import React from "react";
-import {
-  Card,
-  Text,
-  Button,
-  Group,
-  Stack,
-  Avatar,
-  Grid,
-  Divider,
-} from "@mantine/core";
+import { Card, Text, Group, Stack, Avatar, Grid, Divider } from "@mantine/core";
+import { BsFillPeopleFill } from "react-icons/Bs";
+
+import FollowerBadge from "./SocialCard/FollowerBadge";
+import ReputationBadge from "./SocialCard/ReputationBadge";
+import QRBadge from "./SocialCard/QRBadge";
 
 export function SocialCard() {
   const username = "Hello world";
@@ -50,21 +46,15 @@ export function SocialCard() {
         Orci varius natoque penatibus et turpis.
       </Text>
 
-      <Grid>
+      <Grid mt="1rem">
         <Grid.Col span={4}>
-          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-            button
-          </Button>
+          <FollowerBadge numFollowers={1000} />
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-            button
-          </Button>
+          <ReputationBadge reputation={10} />
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-            button
-          </Button>
+          <QRBadge />
         </Grid.Col>
       </Grid>
     </Card>
