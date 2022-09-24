@@ -28,14 +28,15 @@ export function SocialCard() {
     () => get({ userId: session!.user.id }),
     { enabled: !!session }
   );
+
+  const getMyConnectionArgs: Parameters<typeof getMyConnections>[0] = {
+    numItemsPerPage: 1,
+    connectionType: "follower",
+    session: session!,
+  };
   const { data: followersData } = useQuery(
-    [getMyConnections.key, session?.user.id],
-    () =>
-      getMyConnections({
-        numItemsPerPage: 1,
-        connectionType: "follower",
-        session: session!,
-      }),
+    [getMyConnections.key, getMyConnectionArgs],
+    () => getMyConnections(getMyConnectionArgs),
     { enabled: !!session }
   );
 
