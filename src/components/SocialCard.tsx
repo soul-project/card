@@ -6,8 +6,12 @@ import FollowerBadge from "./SocialCard/FollowerBadge";
 import ReputationBadge from "./SocialCard/ReputationBadge";
 import QRBadge from "./SocialCard/QRBadge";
 import Profile from "./Profile";
+import { useSession } from "next-auth/react";
 
 export function SocialCard() {
+  const { data: session } = useSession();
+  console.log(session);
+
   const username = "hello-world";
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
