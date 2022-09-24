@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Button, Group, Tooltip } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
 
-export default function Badge({ children, label, onBadgeClick }: Props) {
+export default function Badge({ children, tooltipLabel, onBadgeClick }: Props) {
   const [opened, setOpened] = useState(false);
   const ref = useClickOutside(() => setOpened(false));
 
-  if (!label) {
+  if (!tooltipLabel) {
     return (
       <Button
         sx={() => ({ width: "100%" })}
@@ -21,17 +21,12 @@ export default function Badge({ children, label, onBadgeClick }: Props) {
 
   return (
     <Tooltip
-      label={label}
+      label={tooltipLabel}
       opened={opened}
       onClick={() => setOpened(true)}
       withArrow
     >
-      <Button
-        sx={() => ({ width: "100%" })}
-        ref={ref}
-        variant="light"
-        onClick={onBadgeClick}
-      >
+      <Button sx={() => ({ width: "100%" })} ref={ref} variant="light">
         <Group sx={() => ({ gap: "8px" })}>{children}</Group>
       </Button>
     </Tooltip>
@@ -39,6 +34,6 @@ export default function Badge({ children, label, onBadgeClick }: Props) {
 }
 
 type Props = React.PropsWithChildren<{
-  label?: string;
+  tooltipLabel?: string;
   onBadgeClick?: () => void;
 }>;

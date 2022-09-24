@@ -7,15 +7,19 @@ const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
 export default function FollowerBadge({ numFollowers }: Props) {
   return (
-    <Badge label={`${formatter.format(numFollowers)} followers`}>
+    <Badge
+      tooltipLabel={`${
+        numFollowers ? formatter.format(numFollowers) : "--"
+      } followers`}
+    >
       <>
         <BsFillPeopleFill />
-        {formatter.format(numFollowers)}
+        {numFollowers ? formatter.format(numFollowers) : "--"}
       </>
     </Badge>
   );
 }
 
 type Props = {
-  numFollowers: number;
+  numFollowers?: number;
 };
