@@ -14,6 +14,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useQuery } from "react-query";
 
 import { get } from "src/modules/reputation/get";
+import { getMyConnections } from "src/modules/userConnections/getMyConnections";
 
 import FollowerBadge from "./SocialCard/FollowerBadge";
 import ReputationBadge from "./SocialCard/ReputationBadge";
@@ -27,7 +28,16 @@ export function SocialCard() {
     () => get({ userId: session!.user.id }),
     { enabled: !!session }
   );
-  console.log(reputationData);
+  const { data: followersData } = useQuery(
+    [getMyConnections.key, session?.user.id],
+    () =>
+      getMyConnections({
+        numItemsPerPage: 1,
+        connectionType: "follower",
+        session: session!,
+      }),
+    { enabled: !!session }
+  );
 
   if (status === "loading") {
     return (
@@ -73,7 +83,7 @@ export function SocialCard() {
 
       <Grid mt="1rem">
         <Grid.Col span={4}>
-          <FollowerBadge numFollowers={1000} />
+          <FollowerBadge numFollowers={followersData?.totalCount} />
         </Grid.Col>
         <Grid.Col span={4}>
           <ReputationBadge reputation={reputationData?.reputation} />
