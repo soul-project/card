@@ -1,7 +1,8 @@
 import React from "react";
-import { Card, Divider, Stack, Tabs } from "@mantine/core";
+import { Card, Divider, Menu, Stack, Tabs } from "@mantine/core";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { SiHandshake } from "react-icons/si";
+import { RiUserUnfollowFill } from "react-icons/ri";
 
 import Profile from "./Profile";
 
@@ -41,7 +42,18 @@ export default function ConnectionsCard() {
           <Stack>
             {profiles.reverse().map(({ username, displayName }, index) => (
               <React.Fragment key={username}>
-                <Profile username={username} displayName={displayName} />
+                <Profile
+                  username={username}
+                  displayName={displayName}
+                  menuActions={
+                    <Menu.Item
+                      color="red"
+                      icon={<RiUserUnfollowFill size={14} />}
+                    >
+                      Un-follow
+                    </Menu.Item>
+                  }
+                />
                 {index < profiles.length - 1 && <Divider />}
               </React.Fragment>
             ))}
@@ -52,7 +64,18 @@ export default function ConnectionsCard() {
           <Stack>
             {profiles.reverse().map(({ username, displayName }, index) => (
               <React.Fragment key={username}>
-                <Profile username={username} displayName={displayName} />
+                <Profile
+                  username={username}
+                  displayName={displayName}
+                  menuActions={
+                    <Menu.Item
+                      color="red"
+                      icon={<RiUserUnfollowFill size={14} />}
+                    >
+                      Un-follow
+                    </Menu.Item>
+                  }
+                />
                 {index < profiles.length - 1 && <Divider />}
               </React.Fragment>
             ))}

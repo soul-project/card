@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Card,
-  Text,
-  Group,
-  Stack,
-  Avatar,
-  Grid,
-  Divider,
-  Code,
-} from "@mantine/core";
+import { Card, Text, Grid, Divider, Menu } from "@mantine/core";
+import { FaSignOutAlt } from "react-icons/fa";
 
 import FollowerBadge from "./SocialCard/FollowerBadge";
 import ReputationBadge from "./SocialCard/ReputationBadge";
@@ -19,7 +11,15 @@ export function SocialCard() {
   const username = "hello-world";
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
-      <Profile username={username} displayName="Display Name" />
+      <Profile
+        username={username}
+        displayName="Display Name"
+        menuActions={
+          <Menu.Item color="red" icon={<FaSignOutAlt size={14} />}>
+            Logout
+          </Menu.Item>
+        }
+      />
 
       <Divider my="sm" />
 
