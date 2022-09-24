@@ -7,11 +7,13 @@ export default function ProfileCard({
   allowUnfollow,
   username,
   displayName,
+  userHandle,
 }: Props) {
   return (
     <Profile
       username={username}
       displayName={displayName}
+      userHandle={userHandle}
       menuActions={
         allowUnfollow ? (
           <Menu.Item color="red" icon={<RiUserUnfollowFill size={14} />}>
@@ -26,5 +28,6 @@ export default function ProfileCard({
 type Props = {
   username: string;
   displayName: string;
+  userHandle: string;
   allowUnfollow?: boolean;
 };
