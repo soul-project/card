@@ -1,10 +1,9 @@
 import React from "react";
-import { Card, Divider, Menu, Stack, Tabs } from "@mantine/core";
+import { Card, Divider, Stack, Tabs } from "@mantine/core";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { SiHandshake } from "react-icons/si";
-import { RiUserUnfollowFill } from "react-icons/ri";
 
-import Profile from "./Profile";
+import ProfileCard from "./ConnectionCard/ProfileCard";
 
 export default function ConnectionsCard() {
   const profiles = [
@@ -31,7 +30,7 @@ export default function ConnectionsCard() {
           <Stack>
             {profiles.map(({ username, displayName }, index) => (
               <React.Fragment key={username}>
-                <Profile username={username} displayName={displayName} />
+                <ProfileCard username={username} displayName={displayName} />
                 {index < profiles.length - 1 && <Divider />}
               </React.Fragment>
             ))}
@@ -42,17 +41,10 @@ export default function ConnectionsCard() {
           <Stack>
             {profiles.reverse().map(({ username, displayName }, index) => (
               <React.Fragment key={username}>
-                <Profile
+                <ProfileCard
                   username={username}
                   displayName={displayName}
-                  menuActions={
-                    <Menu.Item
-                      color="red"
-                      icon={<RiUserUnfollowFill size={14} />}
-                    >
-                      Un-follow
-                    </Menu.Item>
-                  }
+                  allowUnfollow
                 />
                 {index < profiles.length - 1 && <Divider />}
               </React.Fragment>
@@ -64,17 +56,10 @@ export default function ConnectionsCard() {
           <Stack>
             {profiles.reverse().map(({ username, displayName }, index) => (
               <React.Fragment key={username}>
-                <Profile
+                <ProfileCard
                   username={username}
                   displayName={displayName}
-                  menuActions={
-                    <Menu.Item
-                      color="red"
-                      icon={<RiUserUnfollowFill size={14} />}
-                    >
-                      Un-follow
-                    </Menu.Item>
-                  }
+                  allowUnfollow
                 />
                 {index < profiles.length - 1 && <Divider />}
               </React.Fragment>
