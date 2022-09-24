@@ -11,6 +11,9 @@ import {
 } from "@mantine/core";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useQuery } from "react-query";
+
+import { get } from "src/modules/reputation/get";
 
 import FollowerBadge from "./SocialCard/FollowerBadge";
 import ReputationBadge from "./SocialCard/ReputationBadge";
@@ -19,6 +22,12 @@ import Profile from "./Profile";
 
 export function SocialCard() {
   const { data: session, status } = useSession();
+  const { data: reputationData } = useQuery(
+    [get.key, session?.user.id],
+    () => get({ userId: session!.user.id }),
+    { enabled: !!session }
+  );
+  console.log(reputationData);
 
   if (status === "loading") {
     return (
@@ -67,7 +76,7 @@ export function SocialCard() {
           <FollowerBadge numFollowers={1000} />
         </Grid.Col>
         <Grid.Col span={4}>
-          <ReputationBadge reputation={10} />
+          <ReputationBadge reputation={reputationData?.reputation} />
         </Grid.Col>
         <Grid.Col span={4}>
           <QRBadge />

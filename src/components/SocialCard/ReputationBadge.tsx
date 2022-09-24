@@ -7,15 +7,19 @@ const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
 export default function ReputationBadge({ reputation }: Props) {
   return (
-    <Badge tooltipLabel={`${formatter.format(reputation)} reputation points`}>
+    <Badge
+      tooltipLabel={`${
+        reputation ? formatter.format(reputation) : "--"
+      } reputation points`}
+    >
       <>
         <FaMedal />
-        {formatter.format(reputation)}
+        {reputation ? formatter.format(reputation) : "--"}
       </>
     </Badge>
   );
 }
 
 type Props = {
-  reputation: number;
+  reputation?: number;
 };
