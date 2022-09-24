@@ -62,17 +62,20 @@ export default function ConnectionTypeTab({
   return (
     <Tabs.Panel value={connectionType} pt="xs">
       <Stack>
-        {userConnections.map(({ username, displayName, userHandle }, index) => (
-          <React.Fragment key={username}>
-            <ProfileCard
-              username={username}
-              displayName={displayName || username}
-              userHandle={userHandle}
-              allowUnfollow={allowUnfollow}
-            />
-            {index < userConnections.length - 1 && <Divider />}
-          </React.Fragment>
-        ))}
+        {userConnections.map(
+          ({ username, displayName, userHandle, id }, index) => (
+            <React.Fragment key={username}>
+              <ProfileCard
+                username={username}
+                displayName={displayName || username}
+                userHandle={userHandle}
+                userConnectionId={id}
+                allowUnfollow={allowUnfollow}
+              />
+              {index < userConnections.length - 1 && <Divider />}
+            </React.Fragment>
+          )
+        )}
         {hasNextPage && (
           <Center mt="1rem">
             <Button
