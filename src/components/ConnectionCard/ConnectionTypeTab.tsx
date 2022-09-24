@@ -1,14 +1,6 @@
-import {
-  Tabs,
-  Stack,
-  Divider,
-  Card,
-  Center,
-  Loader,
-  Button,
-} from "@mantine/core";
+import React, { useMemo } from "react";
+import { Tabs, Stack, Divider, Center, Loader, Button } from "@mantine/core";
 import { useSession } from "next-auth/react";
-import React from "react";
 import { useInfiniteQuery } from "react-query";
 
 import {
@@ -46,6 +38,11 @@ export default function ConnectionTypeTab({
       }
     );
 
+  const userConnections = useMemo(
+    () => data?.pages.flatMap((page) => page.userConnections) ?? [],
+    [data]
+  );
+
   if (!data || isFetching) {
     return (
       <Tabs.Panel value={connectionType} pt="xs">
@@ -56,24 +53,26 @@ export default function ConnectionTypeTab({
     );
   }
 
+  if (userConnections.length === 0) {
+    <Tabs.Panel value={connectionType} pt="xs">
+      No data to show here ☹️
+    </Tabs.Panel>;
+  }
+
   return (
     <Tabs.Panel value={connectionType} pt="xs">
       <Stack>
-        {data.pages
-          .flatMap((page) => page.userConnections)
-          .map(({ username, displayName, userHandle }, index) => (
-            <React.Fragment key={username}>
-              <ProfileCard
-                username={username}
-                displayName={displayName || username}
-                userHandle={userHandle}
-                allowUnfollow={allowUnfollow}
-              />
-              {index <
-                data.pages.flatMap((page) => page.userConnections).length -
-                  1 && <Divider />}
-            </React.Fragment>
-          ))}
+        {userConnections.map(({ username, displayName, userHandle }, index) => (
+          <React.Fragment key={username}>
+            <ProfileCard
+              username={username}
+              displayName={displayName || username}
+              userHandle={userHandle}
+              allowUnfollow={allowUnfollow}
+            />
+            {index < userConnections.length - 1 && <Divider />}
+          </React.Fragment>
+        ))}
         {hasNextPage && (
           <Center mt="1rem">
             <Button

@@ -29,9 +29,9 @@ export default function ConnectionsCard() {
 
         <ConnectionTypeTab connectionType="follower" />
 
-        <ConnectionTypeTab connectionType="following" />
+        <ConnectionTypeTab connectionType="following" allowUnfollow />
 
-        <ConnectionTypeTab connectionType="mutual" />
+        <ConnectionTypeTab connectionType="mutual" allowUnfollow />
       </Tabs>
     </Card>
   );
