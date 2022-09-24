@@ -5,7 +5,8 @@ import Badge from "./Badge";
 
 export default function QRBadge() {
   return (
-    <Badge>
+    // TODO: Maybe open a modal to show my QR code and think of how we can scan as well
+    <Badge onBadgeClick={() => {}}>
       <IoQrCode />
     </Badge>
   );

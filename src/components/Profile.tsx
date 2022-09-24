@@ -1,6 +1,15 @@
-import { Group, Avatar, Stack, Code, Text } from "@mantine/core";
+import {
+  Group,
+  Avatar,
+  Stack,
+  Code,
+  Text,
+  Menu,
+  ActionIcon,
+} from "@mantine/core";
+import { BsThreeDots } from "react-icons/bs";
 
-export default function Profile({ username, displayName }: Props) {
+export default function Profile({ username, displayName, menuActions }: Props) {
   return (
     <Group sx={() => ({ flexWrap: "nowrap" })}>
       <Avatar
@@ -10,17 +19,42 @@ export default function Profile({ username, displayName }: Props) {
         sx={() => ({ flexShrink: 0 })}
       />
 
-      <Stack sx={() => ({ gap: "0.1rem", flexShrink: 1, minWidth: 0 })}>
-        <Text
-          weight={500}
-          sx={() => ({
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          })}
+      <Stack
+        sx={() => ({
+          gap: "0.1rem",
+          flexShrink: 1,
+          minWidth: 0,
+          width: "100%",
+        })}
+      >
+        <Group
+          position="apart"
+          sx={() => ({ width: "100%", flexWrap: "nowrap" })}
         >
-          {displayName}
-        </Text>
+          <Text
+            weight={500}
+            sx={() => ({
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              flexShrink: 1,
+            })}
+          >
+            {displayName}
+          </Text>
+
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              <ActionIcon
+                sx={() => ({ visibility: menuActions ? "visible" : "hidden" })}
+              >
+                <BsThreeDots size={18} />
+              </ActionIcon>
+            </Menu.Target>
+
+            <Menu.Dropdown>{menuActions}</Menu.Dropdown>
+          </Menu>
+        </Group>
         <Text
           sx={() => ({
             overflow: "hidden",
@@ -47,4 +81,5 @@ export default function Profile({ username, displayName }: Props) {
 type Props = {
   username: string;
   displayName: string;
+  menuActions?: React.ReactElement;
 };
