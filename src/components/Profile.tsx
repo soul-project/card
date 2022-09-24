@@ -9,7 +9,12 @@ import {
 } from "@mantine/core";
 import { BsThreeDots } from "react-icons/bs";
 
-export default function Profile({ username, displayName, menuActions }: Props) {
+export default function Profile({
+  username,
+  displayName,
+  menuActions,
+  userHandle,
+}: Props) {
   return (
     <Group sx={() => ({ flexWrap: "nowrap" })}>
       <Avatar
@@ -71,7 +76,7 @@ export default function Profile({ username, displayName, menuActions }: Props) {
             whiteSpace: "nowrap",
           })}
         >
-          User handle: <Code color="blue">{username}#1</Code>
+          User handle: <Code color="blue">{userHandle}</Code>
         </Text>
       </Stack>
     </Group>
@@ -82,4 +87,5 @@ type Props = {
   username: string;
   displayName: string;
   menuActions?: React.ReactElement;
+  userHandle: string;
 };

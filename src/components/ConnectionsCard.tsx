@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Divider, Stack, Tabs } from "@mantine/core";
+import { Card, Tabs } from "@mantine/core";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { SiHandshake } from "react-icons/si";
 
-import ProfileCard from "./ConnectionCard/ProfileCard";
+import ConnectionTypeTab from "./ConnectionCard/ConnectionTypeTab";
 
 export default function ConnectionsCard() {
   const profiles = [
@@ -11,11 +11,12 @@ export default function ConnectionsCard() {
     { username: "cool-username", displayName: "Cool Display Name" },
     { username: "awesome-username", displayName: "Awesome Display Name" },
   ];
+
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
-      <Tabs defaultValue="followers">
+      <Tabs defaultValue="follower">
         <Tabs.List>
-          <Tabs.Tab value="followers" icon={<BsFillPeopleFill />}>
+          <Tabs.Tab value="follower" icon={<BsFillPeopleFill />}>
             Followers
           </Tabs.Tab>
           <Tabs.Tab value="following" icon={<BsFillPeopleFill />}>
@@ -26,46 +27,11 @@ export default function ConnectionsCard() {
           </Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value="followers" pt="xs">
-          <Stack>
-            {profiles.map(({ username, displayName }, index) => (
-              <React.Fragment key={username}>
-                <ProfileCard username={username} displayName={displayName} />
-                {index < profiles.length - 1 && <Divider />}
-              </React.Fragment>
-            ))}
-          </Stack>
-        </Tabs.Panel>
+        <ConnectionTypeTab connectionType="follower" />
 
-        <Tabs.Panel value="following" pt="xs">
-          <Stack>
-            {profiles.reverse().map(({ username, displayName }, index) => (
-              <React.Fragment key={username}>
-                <ProfileCard
-                  username={username}
-                  displayName={displayName}
-                  allowUnfollow
-                />
-                {index < profiles.length - 1 && <Divider />}
-              </React.Fragment>
-            ))}
-          </Stack>
-        </Tabs.Panel>
+        <ConnectionTypeTab connectionType="following" allowUnfollow />
 
-        <Tabs.Panel value="mutual" pt="xs">
-          <Stack>
-            {profiles.reverse().map(({ username, displayName }, index) => (
-              <React.Fragment key={username}>
-                <ProfileCard
-                  username={username}
-                  displayName={displayName}
-                  allowUnfollow
-                />
-                {index < profiles.length - 1 && <Divider />}
-              </React.Fragment>
-            ))}
-          </Stack>
-        </Tabs.Panel>
+        <ConnectionTypeTab connectionType="mutual" allowUnfollow />
       </Tabs>
     </Card>
   );

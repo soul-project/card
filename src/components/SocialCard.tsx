@@ -67,6 +67,7 @@ export function SocialCard() {
       <Profile
         username={session.user.username}
         displayName={session.user.displayName || session.user.username}
+        userHandle={session.user.userHandle}
         menuActions={
           <Menu.Item
             color="red"
@@ -78,9 +79,12 @@ export function SocialCard() {
         }
       />
 
-      <Divider my="sm" />
-
-      {session.user.bio && <Text mt="1rem">{session.user.bio}</Text>}
+      {session.user.bio && (
+        <>
+          <Divider my="sm" />
+          <Text mt="1rem">{session.user.bio}</Text>
+        </>
+      )}
 
       <Grid mt="1rem">
         <Grid.Col span={4}>
