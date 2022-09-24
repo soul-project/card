@@ -1,25 +1,58 @@
 import React from "react";
-import { Card, Text, Grid, Divider, Menu } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Grid,
+  Divider,
+  Menu,
+  Button,
+  Center,
+  Loader,
+} from "@mantine/core";
 import { FaSignOutAlt } from "react-icons/fa";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import FollowerBadge from "./SocialCard/FollowerBadge";
 import ReputationBadge from "./SocialCard/ReputationBadge";
 import QRBadge from "./SocialCard/QRBadge";
 import Profile from "./Profile";
-import { useSession } from "next-auth/react";
 
 export function SocialCard() {
-  const { data: session } = useSession();
-  console.log(session);
+  const { data: session, status } = useSession();
 
-  const username = "hello-world";
+  if (status === "loading") {
+    return (
+      <Card shadow="sm" p="lg" radius="md" withBorder>
+        <Center>
+          <Loader color="green" />
+        </Center>
+      </Card>
+    );
+  }
+
+  if (!session) {
+    return (
+      <Card shadow="sm" p="lg" radius="md" withBorder>
+        <Center>
+          <Button variant="light" color="green" onClick={() => signIn("soul")}>
+            Login to start using!
+          </Button>
+        </Center>
+      </Card>
+    );
+  }
+
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Profile
-        username={username}
-        displayName="Display Name"
+        username={session.user.username}
+        displayName={session.user.displayName || session.user.username}
         menuActions={
-          <Menu.Item color="red" icon={<FaSignOutAlt size={14} />}>
+          <Menu.Item
+            color="red"
+            icon={<FaSignOutAlt size={14} />}
+            onClick={() => signOut()}
+          >
             Logout
           </Menu.Item>
         }
@@ -27,12 +60,7 @@ export function SocialCard() {
 
       <Divider my="sm" />
 
-      <Text mt="1rem">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis nisl
-        finibus, interdum dolor in, imperdiet magna. Integer in purus nec augue
-        ultricies sollicitudin sit amet a ligula. In eget sollicitudin justo.
-        Orci varius natoque penatibus et turpis.
-      </Text>
+      {session.user.bio && <Text mt="1rem">{session.user.bio}</Text>}
 
       <Grid mt="1rem">
         <Grid.Col span={4}>

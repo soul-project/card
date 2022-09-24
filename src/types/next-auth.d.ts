@@ -7,6 +7,8 @@ interface SoulUser {
   isActive: boolean;
   username: string;
   userHandle: string;
+  displayName: string | null;
+  bio: string | null;
 }
 
 declare module "next-auth" {
