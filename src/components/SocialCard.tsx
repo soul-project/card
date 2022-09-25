@@ -94,7 +94,12 @@ export function SocialCard() {
           <ReputationBadge reputation={reputationData?.reputation} />
         </Grid.Col>
         <Grid.Col span={4}>
-          <QRBadge />
+          <QRBadge
+            userId={session.user.id}
+            handle={session.user.userHandle}
+            username={session.user.username}
+            displayName={session.user.displayName}
+          />
         </Grid.Col>
       </Grid>
     </Card>
