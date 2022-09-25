@@ -54,9 +54,13 @@ export default function ConnectionTypeTab({
   }
 
   if (userConnections.length === 0) {
-    <Tabs.Panel value={connectionType} pt="xs">
-      No data to show here ☹️
-    </Tabs.Panel>;
+    return (
+      <Tabs.Panel value={connectionType} pt="xs">
+        <Center sx={() => ({ padding: "1rem" })}>
+          Nothing to show here 😢
+        </Center>
+      </Tabs.Panel>
+    );
   }
 
   return (
