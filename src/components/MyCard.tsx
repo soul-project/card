@@ -5,29 +5,30 @@ import {
   Grid,
   Divider,
   Menu,
-  Button,
-  Center,
-  Loader,
+  useMantineColorScheme,
 } from "@mantine/core";
 import { FaSignOutAlt } from "react-icons/fa";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { useSession, signOut } from "next-auth/react";
 import { useQuery } from "react-query";
 
 import { get } from "src/modules/reputation/get";
 import { getMyConnections } from "src/modules/userConnections/getMyConnections";
 
-import FollowerBadge from "./SocialCard/FollowerBadge";
-import ReputationBadge from "./SocialCard/ReputationBadge";
-import QRBadge from "./SocialCard/QRBadge";
+import FollowerBadge from "./MyCard/FollowerBadge";
+import ReputationBadge from "./MyCard/ReputationBadge";
+import QRBadge from "./MyCard/QRBadge";
 import Profile from "./Profile";
 
-export function SocialCard() {
+export default function MyCard() {
   const { data: session } = useSession();
   const { data: reputationData } = useQuery(
     [get.key, session?.user.id],
     () => get({ userId: session!.user.id }),
     { enabled: !!session }
   );
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const isDarkMode = colorScheme === "dark";
 
   const getMyConnectionArgs: Parameters<typeof getMyConnections>[0] = {
     numItemsPerPage: 1,
@@ -49,13 +50,27 @@ export function SocialCard() {
         displayName={session.user.displayName || session.user.username}
         userHandle={session.user.userHandle}
         menuActions={
-          <Menu.Item
-            color="red"
-            icon={<FaSignOutAlt size={14} />}
-            onClick={() => signOut()}
-          >
-            Logout
-          </Menu.Item>
+          <>
+            <Menu.Item
+              icon={
+                isDarkMode ? (
+                  <MdLightMode size={14} />
+                ) : (
+                  <MdDarkMode size={14} />
+                )
+              }
+              onClick={() => toggleColorScheme()}
+            >
+              Toggle {isDarkMode ? "light mode" : "dark mode"}
+            </Menu.Item>
+            <Menu.Item
+              color="red"
+              icon={<FaSignOutAlt size={14} />}
+              onClick={() => signOut()}
+            >
+              Logout
+            </Menu.Item>
+          </>
         }
       />
 
