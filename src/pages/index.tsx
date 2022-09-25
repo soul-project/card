@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 import Head from "src/components/Head";
 import Page from "src/components/Page";
-import { SocialCard } from "src/components/SocialCard";
+import MyCard from "src/components/MyCard";
 import ConnectionsCard from "src/components/ConnectionsCard";
 
 const Home: NextPage = () => {
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       <main>
         <Page>
           <Stack spacing="lg">
-            <SocialCard />
+            <MyCard />
             <ConnectionsCard />
           </Stack>
         </Page>

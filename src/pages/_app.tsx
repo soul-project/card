@@ -1,9 +1,14 @@
 import { useState } from "react";
 import type { AppProps } from "next/app";
-import { MantineProvider } from "@mantine/core";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import { useLocalStorage } from "@mantine/hooks";
 
 import { RouterTransition } from "src/components/RouterTrasition";
 
@@ -11,6 +16,15 @@ function MyApp({
   Component,
   pageProps: { session, dehydratedState, ...pageProps },
 }: AppProps<{ session: Session; dehydratedState: unknown }>) {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: "mantine-color-scheme-soul-card",
+    defaultValue: "light",
+    getInitialValueInEffect: true,
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
   const [queryClient] = useState(() => new QueryClient());
 
   return (
@@ -21,14 +35,19 @@ function MyApp({
     >
       <QueryClientProvider client={queryClient}>
         <Hydrate state={dehydratedState}>
-          <MantineProvider
-            withGlobalStyles
-            withNormalizeCSS
-            theme={{ colorScheme: "light" }}
+          <ColorSchemeProvider
+            colorScheme={colorScheme}
+            toggleColorScheme={toggleColorScheme}
           >
-            <RouterTransition />
-            <Component {...pageProps} />
-          </MantineProvider>
+            <MantineProvider
+              withGlobalStyles
+              withNormalizeCSS
+              theme={{ colorScheme }}
+            >
+              <RouterTransition />
+              <Component {...pageProps} />
+            </MantineProvider>
+          </ColorSchemeProvider>
         </Hydrate>
       </QueryClientProvider>
     </SessionProvider>
