@@ -22,7 +22,7 @@ import QRBadge from "./SocialCard/QRBadge";
 import Profile from "./Profile";
 
 export function SocialCard() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const { data: reputationData } = useQuery(
     [get.key, session?.user.id],
     () => get({ userId: session!.user.id }),
@@ -40,27 +40,7 @@ export function SocialCard() {
     { enabled: !!session }
   );
 
-  if (status === "loading") {
-    return (
-      <Card shadow="sm" p="lg" radius="md" withBorder>
-        <Center>
-          <Loader color="green" />
-        </Center>
-      </Card>
-    );
-  }
-
-  if (!session) {
-    return (
-      <Card shadow="sm" p="lg" radius="md" withBorder>
-        <Center>
-          <Button variant="light" color="green" onClick={() => signIn("soul")}>
-            Login to start using!
-          </Button>
-        </Center>
-      </Card>
-    );
-  }
+  if (!session) throw new Error("Used not signed in");
 
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>

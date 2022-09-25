@@ -75,7 +75,9 @@ export default function FollowProfile({
       }
     );
 
-  if (isFetchingFollowStatus || !session) {
+  if (!session) throw new Error("Used not logged in");
+
+  if (isFetchingFollowStatus) {
     return (
       <Center>
         <Loader />
@@ -102,7 +104,7 @@ export default function FollowProfile({
           isFetchingFollowStatus ||
           isLoadingDestroyConnection
         }
-        disabled={userId === session.user.id}
+        disabled={userId === session.user.id || isFetchingFollowStatus}
         onClick={() =>
           userConnectionData === null ? createConnection() : destroyConnection()
         }

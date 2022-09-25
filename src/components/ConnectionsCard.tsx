@@ -6,12 +6,6 @@ import { SiHandshake } from "react-icons/si";
 import ConnectionTypeTab from "./ConnectionCard/ConnectionTypeTab";
 
 export default function ConnectionsCard() {
-  const profiles = [
-    { username: "another-username", displayName: "Another Display Name" },
-    { username: "cool-username", displayName: "Cool Display Name" },
-    { username: "awesome-username", displayName: "Awesome Display Name" },
-  ];
-
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Tabs defaultValue="follower">

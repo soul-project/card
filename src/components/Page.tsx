@@ -1,26 +1,10 @@
 import { useEffect } from "react";
-import { Box } from "@mantine/core";
+import { Box, Button, Card, Center, Loader } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useSession, signOut, signIn } from "next-auth/react";
 
-export default function Page({ children }: Props) {
+function PageWrapper({ children }: React.PropsWithChildren) {
   const largeScreen = useMediaQuery("(min-width: 500px)");
-
-  const { data: session } = useSession();
-  const { push } = useRouter();
-
-  useEffect(() => {
-    const singOutAndRedirect = async () => {
-      await signOut();
-      push("/");
-    };
-
-    if (session?.error === "RefreshAccessTokenError") {
-      singOutAndRedirect();
-    }
-  }, [push, session]);
-
   return (
     <Box
       sx={() => ({
@@ -32,6 +16,48 @@ export default function Page({ children }: Props) {
       {children}
     </Box>
   );
+}
+
+export default function Page({ children }: Props) {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (session?.error === "RefreshAccessTokenError") {
+      signOut();
+    }
+  }, [session?.error]);
+
+  if (status === "loading") {
+    return (
+      <PageWrapper>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Center>
+            <Loader color="green" />
+          </Center>
+        </Card>
+      </PageWrapper>
+    );
+  }
+
+  if (!session) {
+    return (
+      <PageWrapper>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Center>
+            <Button
+              variant="light"
+              color="green"
+              onClick={() => signIn("soul")}
+            >
+              Login to start using!
+            </Button>
+          </Center>
+        </Card>
+      </PageWrapper>
+    );
+  }
+
+  return <PageWrapper>{children}</PageWrapper>;
 }
 
 type Props = React.PropsWithChildren;
