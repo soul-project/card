@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <Page>
           <Stack spacing="lg">
             <SocialCard />
-            {session && <ConnectionsCard />}
+            <ConnectionsCard />
           </Stack>
         </Page>
       </main>
