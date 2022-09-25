@@ -17,7 +17,7 @@ function MyApp({
   pageProps: { session, dehydratedState, ...pageProps },
 }: AppProps<{ session: Session; dehydratedState: unknown }>) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
-    key: "mantine-color-scheme",
+    key: "mantine-color-scheme-soul-card",
     defaultValue: "light",
     getInitialValueInEffect: true,
   });
