@@ -40,7 +40,7 @@ export default function QRBadge({
           <Button
             variant="filled"
             color="green"
-            sx={() => ({ width: "60%" })}
+            sx={() => ({ width: "100px" })}
             onClick={() => setOpened(false)}
           >
             <FaCheck size={24} />
