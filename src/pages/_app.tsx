@@ -5,6 +5,8 @@ import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 
+import { RouterTransition } from "src/components/RouterTrasition";
+
 function MyApp({
   Component,
   pageProps: { session, dehydratedState, ...pageProps },
@@ -24,6 +26,7 @@ function MyApp({
             withNormalizeCSS
             theme={{ colorScheme: "light" }}
           >
+            <RouterTransition />
             <Component {...pageProps} />
           </MantineProvider>
         </Hydrate>

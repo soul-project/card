@@ -1,11 +1,11 @@
 import React from "react";
 import NextHead from "next/head";
 
-export default function Head({ username }: Props) {
+export default function Head({ subTitle }: Props) {
   return (
     <NextHead>
-      {username ? (
-        <title>Soul - Card | {username}</title>
+      {subTitle ? (
+        <title>Soul - Card | {subTitle}</title>
       ) : (
         <title>Soul - Card</title>
       )}
@@ -17,5 +17,5 @@ export default function Head({ username }: Props) {
 }
 
 type Props = {
-  username?: string;
+  subTitle?: string;
 };
