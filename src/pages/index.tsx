@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Head username={session?.user.username} />
+      <Head subTitle={session?.user.username} />
       <main>
         <Page>
           <Stack spacing="lg">
