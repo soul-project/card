@@ -22,7 +22,7 @@ const FollowByQR: NextPage = () => {
 
   return (
     <div>
-      <Head subTitle="Follow a friend" />
+      <Head subTitle={`Follow ${username}`} />
       <main>
         <Page>
           <Stack>

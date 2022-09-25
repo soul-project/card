@@ -89,7 +89,6 @@ export default function FollowProfile({
         src={`https://avatars.dicebear.com/api/identicon/${username}.svg`}
         alt="Avatar image"
         radius="xl"
-        sx={() => ({ flexShrink: 0 })}
         size="lg"
       />
       <Text weight={500} size="lg">
