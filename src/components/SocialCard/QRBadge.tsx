@@ -1,7 +1,8 @@
-import { Center, Modal } from "@mantine/core";
+import { Button, Modal, Stack } from "@mantine/core";
 import React, { useState } from "react";
-import { IoQrCode } from "react-icons/io5";
 import QRCode from "react-qr-code";
+import { IoQrCode } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa";
 
 import Badge from "./Badge";
 
@@ -31,10 +32,20 @@ export default function QRBadge({
         opened={opened}
         onClose={() => setOpened(false)}
         title="Invite a friend to follow!"
+        fullScreen
       >
-        <Center>
+        <Stack mt="4rem" align="center" sx={() => ({ gap: "2rem" })}>
           <QRCode value={getFollowUrl()} />
-        </Center>
+
+          <Button
+            variant="filled"
+            color="green"
+            sx={() => ({ width: "60%" })}
+            onClick={() => setOpened(false)}
+          >
+            <FaCheck size={24} />
+          </Button>
+        </Stack>
       </Modal>
 
       <Badge onBadgeClick={() => setOpened(true)}>
