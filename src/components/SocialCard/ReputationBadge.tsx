@@ -9,12 +9,12 @@ export default function ReputationBadge({ reputation }: Props) {
   return (
     <Badge
       tooltipLabel={`${
-        reputation ? formatter.format(reputation) : "--"
+        reputation !== undefined ? formatter.format(reputation) : "--"
       } reputation points`}
     >
       <>
         <FaMedal />
-        {reputation ? formatter.format(reputation) : "--"}
+        {reputation !== undefined ? formatter.format(reputation) : "--"}
       </>
     </Badge>
   );

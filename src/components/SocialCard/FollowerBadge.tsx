@@ -9,12 +9,12 @@ export default function FollowerBadge({ numFollowers }: Props) {
   return (
     <Badge
       tooltipLabel={`${
-        numFollowers ? formatter.format(numFollowers) : "--"
+        numFollowers !== undefined ? formatter.format(numFollowers) : "--"
       } followers`}
     >
       <>
         <BsFillPeopleFill />
-        {numFollowers ? formatter.format(numFollowers) : "--"}
+        {numFollowers !== undefined ? formatter.format(numFollowers) : "--"}
       </>
     </Badge>
   );
