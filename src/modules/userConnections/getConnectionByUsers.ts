@@ -34,7 +34,7 @@ export const getConnectionByUsers = async ({
   }
 };
 
-getConnectionByUsers.key = "modules/users/getConnectionByUsers";
+getConnectionByUsers.key = "modules/userConnections/getConnectionByUsers";
 
 type UserConnectionsData = {
   id: number;

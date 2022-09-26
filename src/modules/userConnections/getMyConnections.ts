@@ -46,7 +46,7 @@ export const getMyConnections = async ({
   };
 };
 
-getMyConnections.key = "modules/users/getMyConnections";
+getMyConnections.key = "modules/userConnections/getMyConnections";
 
 type UserConnectionsData = {
   id: number;
