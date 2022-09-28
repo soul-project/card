@@ -11,7 +11,6 @@ export default function Head({ subTitle }: Props) {
       )}
       <meta name="description" content="Your social card powered by Soul" />
       <link rel="icon" href="/card-icon.svg" />
-      <meta httpEquiv="refresh" content="1900" />
     </NextHead>
   );
 }
