@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# soul-card
 
-## Getting Started
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+Soul card was developed with Soul identity provider.
 
-```bash
-npm run dev
-# or
-yarn dev
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsoul-project%2Fcard&env=NEXTAUTH_URL,NEXTAUTH_SECRET,SOUL_PLATFORM_ID&envDescription=Env%20variables%20needed%20for%20NextAuth%20to%20work%20properly.%20You%20may%20set%20NEXTAUTH_URL%20to%20http%3A%2F%2Flocalhost%3A3000%20if%20your%20app%20deployment%20url%20is%20not%20known%20yet.&envLink=https%3A%2F%2Fnext-auth.js.org%2Fconfiguration%2Foptions%23environment-variables)
+
+## Running locally
+
+1. Create an account on Soul by visiting https://login.soul-network.com/register
+2. Login through https://www.soul-network.com/ using your new account and retrieve the access token
+3. Create a new platform using your account (please replace the placeholders with your desired values)
+
+```shell
+$ curl --location --request POST 'https://api.soul-network.com/v1/platforms' \
+  --header 'Authorization: Bearer <AUTH_TOKEN>' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+      "name": "<PLATFORM_NAME>",
+      "redirect_uris": ["<VALID_CALLBACK_URL>"]
+  }'
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Information about your platform will be returned, including a unique identifier represented by
+   the `id` field
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+5. Make a copy of `.env.development` and call it `.env.development.local`, `SOUL_PLATFORM_ID` should be
+   set to the `id` you've obtained on the step above
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+6. Run the application!
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```shell
+$ nvm use
+$ npm -g install npm@8
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+$ npm run dev
+```
